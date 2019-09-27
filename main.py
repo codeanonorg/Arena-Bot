@@ -6,11 +6,21 @@ from discord.ext import commands
 import asyncio
 import datetime
 import time
+import os
+from ast import literal_eval
 
 # ( () |) [-   /\ |\| () |\|
 
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ SECRET @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #
-???
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ENV @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #
+rootme_list = literal_eval(os.environ['arena_rm_list'])
+wechall_list = literal_eval(os.environ['arena_wc_list'])
+
+codeanon_id = int(os.environ['arena_ca_id'])
+ctf_chan_id = int(os.environ['arena_ctf_id'])
+test_chan_id = int(os.environ['arena_test_id'])
+
+flag_ctf_rentree = os.environ['arena_flag']
+token = os.environ['arena_token']
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #
 
 
@@ -153,7 +163,7 @@ def tableau():
     table = []
     for pseudo in rootme_list:
         table.append((int(score_rootme(pseudo)), pseudo))
-        time.sleep(0.5)
+        time.sleep(0.5)  # permet aux requtes de ne pas etre bloques par root-me
     table.sort()
     table.reverse()
     return table  # notre liste de tuple est maintenant classée par score décroissant
@@ -162,7 +172,7 @@ def tableau():
 async def classement_hebdo():
     """Classement hebdomadaire des challengers"""
     print("OK")
-    channel = arena_bot.get_channel(rootme_chan_id)  # on sélectionne le chan root-me
+    channel = arena_bot.get_channel(ctf_chan_id)  # on sélectionne le chan root-me
     # channel = arena_bot.get_channel(test_chan_id)    # todo: à décommenter pour les tests
 
     liste = tableau()  # on récupère le classement
@@ -362,6 +372,7 @@ async def close(ctx):
 #         - Système
 #         - IA & Maths
 #
-# Pour vous abonner à une section, n'hésitez pas à réagir à ce message avec la lettre correspondante !""")
+# Pour vous abonner à une section, n'hésitez pas à réagir à ce message avec \
+# la lettre correspondante !""")
 # ================================== MAIN =================================== #
 arena_bot.run(token)  # on pouvait difficilement faire plus court
