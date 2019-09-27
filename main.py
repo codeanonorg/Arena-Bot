@@ -7,16 +7,18 @@ import asyncio
 import datetime
 import time
 import os
+from ast import literal_eval
 
 # ( () |) [-   /\ |\| () |\|
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ENV @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #
-# Ce qui est dans cet encadré ne doit pas être rendu public
-rootme_list = os.environ['arena_rm_list']
-wechall_list = os.environ['arena_wc_list']
-codeanon_id = os.environ['arena_ca_id']
-ctf_chan_id = os.environ['arena_ctf_id']
-test_chan_id = os.environ['arena_test_id']
+rootme_list = literal_eval(os.environ['arena_rm_list'])
+wechall_list = literal_eval(os.environ['arena_wc_list'])
+
+codeanon_id = int(os.environ['arena_ca_id'])
+ctf_chan_id = int(os.environ['arena_ctf_id'])
+test_chan_id = int(os.environ['arena_test_id'])
+
 flag_ctf_rentree = os.environ['arena_flag']
 token = os.environ['arena_token']
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #
